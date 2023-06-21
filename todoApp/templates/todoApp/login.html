@@ -1,0 +1,35 @@
+{% extends './base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %} 
+    <div class="w-1/2 my-12 mx-auto p-6 bg-gray-100 rounded">
+        <h2 class="mb-6 p-4 text-3xl text-center">Login</h2>
+        <form action="." method="post" class="py-12">
+            {% csrf_token %}
+            
+            {% if form.errors or form.non_field_errors %}   
+                <div class="mb-3 p-6 bg-red-100 rounded">
+                    
+                    {% for field in form %}
+                        {{ field.errors }}
+                    {% endfor %}
+                    {{ form.non_field_errors }}
+                        
+                </div>
+            {% endif %}
+            <div class="mb-3">
+                <label class="inline-block mb-2">Your Username</label> <br>
+                {{ form.username }}
+            </div>
+            <div class="mb-3">
+                <label class="inline-block mb-2">Password</label> <br>
+                {{ form.password }}
+            </div>
+            <div>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+    

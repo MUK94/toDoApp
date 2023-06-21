@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{% block title %}{% endblock %} | MkDev</title>
+</head>
+<body class="px-36">
+    <nav class="bg-blue-500 py-4">
+        <div class="container mx-auto flex justify-between items-center px-4">
+          <a href="/" class="text-white font-bold text-2xl">MkDev</a>
+          <div>
+            
+            {% if user.is_authenticated %}
+                <a href="{% url 'todoApp:logout' %}" class="bg-white text-blue-500 font-bold py-2 px-4 rounded">Logout</a>
+            {% else %}
+                <a href="{% url 'todoApp:login' %}" class="text-white mx-2">Login</a>
+                <a href="{% url 'todoApp:signup' %}" class="bg-white text-blue-500 font-bold py-2 px-4 rounded">Register</a>
+            {% endif %}
+                
+          </div>
+        </div>
+    </nav>
+    
+    <div class="content">
+        {% block content %}
+        
+        {% endblock %}
+    </div>
+
+    <footer class="bg-gray-200 py-4">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-600">© 2023 Mouctar. All rights reserved.</p>
+        </div>
+    </footer>    
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% extends './base.html' %}
+
+{% block title %}Home{% endblock %}
+    
+
+{% block content %} 
+    <div class="container py-8 mx-auto">
+        <div class="w-full flex justify-between my-4">
+            <form  action="{% url 'todoApp:index' %}" method="get" class="w-1/2 flex justify-between">
+                <input type="text" name='query' value='{{ query }}' placeholder="Search..." class="w-full border border-gray-300 px-4 py-2">
+                <button class="bg-gray-500 text-white px-4 py-2 w-1/6">Search</button>
+            </form>
+            <div>
+            <a href="{% url 'todoApp:createTodo' %}" class="bg-blue-500 text-white px-4 py-2 rounded ml-2">Add Todo</a>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+
+            {% comment %} TODO CARD {% endcomment %}
+            
+            {% for todo in todos %}
+            <div class="bg-white border border-gray-300 rounded p-4">
+                <h2 class=" my-4 text-xl font-bold"> <span>{{ todo.id }} </span>.  {{ todo.title   }}</h2>
+                <div class="px-4">
+                    <p class="my-4 text-gray-500"> {{ todo.description }}</p>
+                    <p>Author: <strong> {{ todo.created_by }}</strong></p>
+                </div>
+                <div class="mt-4">
+                    <a href="{% url 'todoApp:editTodo' todo.pk %}" class="bg-blue-500 text-white px-4 py-2 rounded">Edit</a>
+                    <a href="{% url 'todoApp:deleteTodo' todo.pk %}" class="bg-red-500 text-white px-4 py-2 rounded ml-2">Delete</a>
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+{% endblock %}
+    
